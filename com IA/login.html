@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Chronic IA | Acesso</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f0c1f, #1a1a2e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Fundo com efeito de partículas */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 25% 40%, rgba(192,64,64,0.15) 0%, transparent 50%),
+                radial-gradient(circle at 75% 60%, rgba(191,64,64,0.1) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        /* Partículas flutuantes */
+        .particle {
+            position: fixed;
+            background: rgba(192,64,64,0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Container do login */
+        .login-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 460px;
+        }
+
+        /* Card de login */
+        .login-card {
+            background: rgba(20, 20, 35, 0.85);
+            backdrop-filter: blur(15px);
+            border-radius: 48px;
+            padding: 48px 40px;
+            border: 1px solid rgba(192, 64, 64, 0.3);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(192,64,64,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(192, 64, 64, 0.5);
+        }
+
+        /* Logo */
+        .logo-area {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        /* Logo com imagem */
+        .logo-img {
+            height: 60px;
+            width: auto;
+            max-width: 180px;
+            object-fit: contain;
+            margin-bottom: 16px;
+        }
+
+        .logo-icon {
+            font-size: 60px;
+            color: #c04040;
+            margin-bottom: 16px;
+            display: none; /* Escondido quando tem imagem */
+        }
+
+        .logo-area h1 {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffffff, #ffb6b6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-area p {
+            color: #a0a0b0;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        /* Título do formulário */
+        .form-title {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .form-title h2 {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-title span {
+            color: #a0a0b0;
+            font-size: 14px;
+        }
+
+        /* Campos de input */
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #e0e0e0;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .input-field {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            border: 1px solid rgba(192, 64, 64, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .input-field:hover {
+            border-color: rgba(192, 64, 64, 0.6);
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .input-field:focus-within {
+            border-color: #c04040;
+            box-shadow: 0 0 0 3px rgba(192, 64, 64, 0.2);
+        }
+
+        .input-field i {
+            padding: 0 16px;
+            color: #c04040;
+            font-size: 18px;
+        }
+
+        .input-field input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 16px 16px 16px 0;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .input-field input::placeholder {
+            color: #6a6a7a;
+        }
+
+        /* Opções extras */
+        .options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            color: #b0b0c0;
+            font-size: 13px;
+        }
+
+        .checkbox input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #c04040;
+        }
+
+        .forgot-link {
+            color: #c04040;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.2s;
+        }
+
+        .forgot-link:hover {
+            color: #ff8080;
+            text-decoration: underline;
+        }
+
+        /* Botão de login */
+        .btn-login {
+            width: 100%;
+            background: linear-gradient(135deg, #c04040, #bf4040);
+            border: none;
+            padding: 16px;
+            border-radius: 40px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 24px;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(192, 64, 64, 0.3);
+            background: linear-gradient(135deg, #d04a4a, #cf4a4a);
+        }
+
+        /* Separador */
+        .separator {
+            text-align: center;
+            margin: 24px 0;
+            position: relative;
+        }
+
+        .separator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: rgba(192, 64, 64, 0.3);
+        }
+
+        .separator span {
+            background: rgba(20, 20, 35, 0.9);
+            padding: 0 16px;
+            color: #a0a0b0;
+            font-size: 13px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Botões sociais */
+        .social-buttons {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .social-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(192, 64, 64, 0.3);
+            border-radius: 40px;
+            padding: 12px;
+            color: #e0e0e0;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .social-btn:hover {
+            background: rgba(192, 64, 64, 0.15);
+            border-color: #c04040;
+            transform: translateY(-2px);
+        }
+
+        .social-btn i {
+            font-size: 18px;
+        }
+
+        /* Link de cadastro */
+        .signup-link {
+            text-align: center;
+            color: #a0a0b0;
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #c04040;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .signup-link a:hover {
+            color: #ff8080;
+            text-decoration: underline;
+        }
+
+        /* Mensagem de erro/sucesso */
+        .message {
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 13px;
+            display: none;
+        }
+
+        .message.error {
+            background: rgba(192, 64, 64, 0.2);
+            border: 1px solid #c04040;
+            color: #ffb0b0;
+            display: block;
+        }
+
+        .message.success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4caf50;
+            color: #a5e0a5;
+            display: block;
+        }
+
+        /* Link voltar */
+        .back-link {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .back-link a {
+            color: #a0a0b0;
+            text-decoration: none;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .back-link a:hover {
+            color: #c04040;
+        }
+
+        /* Responsivo */
+        @media (max-width: 500px) {
+            .login-card {
+                padding: 32px 24px;
+            }
+            
+            .social-buttons {
+                flex-direction: column;
+            }
+            
+            .options {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* Animação */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-card {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Partículas decorativas -->
+    <div class="particle" style="width: 300px; height: 300px; top: -150px; left: -150px; background: radial-gradient(circle, rgba(192,64,64,0.2) 0%, transparent 70%);"></div>
+    <div class="particle" style="width: 200px; height: 200px; bottom: -100px; right: -100px; background: radial-gradient(circle, rgba(191,64,64,0.15) 0%, transparent 70%);"></div>
+    <div class="particle" style="width: 150px; height: 150px; top: 30%; right: 10%; background: radial-gradient(circle, rgba(192,64,64,0.1) 0%, transparent 70%);"></div>
+
+    <div class="login-container">
+        <div class="login-card">
+            <div class="logo-area">
+                <!-- LOGO COM IMAGEM -->
+                <img src="com IA/imagem/logo.png.png" alt="Chronic IA Logo" class="logo-img" 
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="logo-icon" style="display: none;">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h1>Chronic IA</h1>
+                <p>Inteligência Artificial do Futuro</p>
+            </div>
+
+            <div class="form-title">
+                <h2>Bem-vindo de volta</h2>
+                <span>Faça login para acessar sua conta</span>
+            </div>
+
+            <!-- Mensagem de feedback -->
+            <div id="messageBox" class="message"></div>
+
+            <!-- Formulário de login -->
+            <form id="loginForm">
+                <div class="input-group">
+                    <label>E-mail ou usuário</label>
+                    <div class="input-field">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" placeholder="seu@email.com" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Senha</label>
+                    <div class="input-field">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div class="options">
+                    <label class="checkbox">
+                        <input type="checkbox" id="remember"> Lembrar-me
+                    </label>
+                    <a href="#" class="forgot-link">Esqueceu a senha?</a>
+                </div>
+
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-arrow-right-to-bracket"></i> Entrar
+                </button>
+            </form>
+
+            <div class="separator">
+                <span>ou continue com</span>
+            </div>
+
+            <div class="social-buttons">
+                <a href="#" class="social-btn" id="googleBtn">
+                    <i class="fab fa-google"></i> Google
+                </a>
+                <a href="#" class="social-btn" id="githubBtn">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+
+            <div class="signup-link">
+                Não tem uma conta? <a href="#" id="signupLink">Criar conta gratuita</a>
+            </div>
+
+            <div class="back-link">
+                <a href="index.html">
+                    <i class="fas fa-arrow-left"></i> Voltar para o site
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const messageBox = document.getElementById('messageBox');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const rememberCheck = document.getElementById('remember');
+        const googleBtn = document.getElementById('googleBtn');
+        const githubBtn = document.getElementById('githubBtn');
+        const signupLink = document.getElementById('signupLink');
+
+        if (localStorage.getItem('rememberedEmail')) {
+            emailInput.value = localStorage.getItem('rememberedEmail');
+            rememberCheck.checked = true;
+        }
+
+        function showMessage(text, type) {
+            messageBox.textContent = text;
+            messageBox.className = 'message ' + type;
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+                messageBox.className = 'message';
+            }, 3000);
+            messageBox.style.display = 'block';
+        }
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!email || !password) {
+                showMessage('Por favor, preencha todos os campos.', 'error');
+                return;
+            }
+
+            if (rememberCheck.checked) {
+                localStorage.setItem('rememberedEmail', email);
+            } else {
+                localStorage.removeItem('rememberedEmail');
+            }
+
+            showMessage('Login realizado com sucesso! Redirecionando...', 'success');
+            
+            setTimeout(() => {
+                alert('Bem-vindo à Chronic IA! (Demonstração)');
+                loginForm.reset();
+            }, 1500);
+        });
+
+        googleBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showMessage('Redirecionando para autenticação Google...', 'success');
+            setTimeout(() => {
+                alert('Demo: Login com Google simulado!');
+            }, 800);
+        });
+
+        githubBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showMessage('Redirecionando para autenticação GitHub...', 'success');
+            setTimeout(() => {
+                alert('Demo: Login com GitHub simulado!');
+            }, 800);
+        });
+
+        signupLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showMessage('Funcionalidade de cadastro disponível em breve!', 'success');
+        });
+
+        document.querySelector('.forgot-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            showMessage('Instruções de recuperação enviadas para seu e-mail (demonstração).', 'success');
+        });
+    </script>
+</body>
+</html>
