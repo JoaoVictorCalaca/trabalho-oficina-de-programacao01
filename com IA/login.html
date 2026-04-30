@@ -415,7 +415,7 @@
         <div class="login-card">
             <div class="logo-area">
                 <!-- LOGO COM IMAGEM -->
-                <img src="com IA/imagem/logo.png.png" alt="Chronic IA Logo" class="logo-img" 
+                <img src="../public/logo.png.png" alt="Chronic IA Logo" class="logo-img" 
                      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
                 <div class="logo-icon" style="display: none;">
                     <i class="fas fa-brain"></i>
@@ -486,82 +486,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        const loginForm = document.getElementById('loginForm');
-        const messageBox = document.getElementById('messageBox');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const rememberCheck = document.getElementById('remember');
-        const googleBtn = document.getElementById('googleBtn');
-        const githubBtn = document.getElementById('githubBtn');
-        const signupLink = document.getElementById('signupLink');
-
-        if (localStorage.getItem('rememberedEmail')) {
-            emailInput.value = localStorage.getItem('rememberedEmail');
-            rememberCheck.checked = true;
-        }
-
-        function showMessage(text, type) {
-            messageBox.textContent = text;
-            messageBox.className = 'message ' + type;
-            setTimeout(() => {
-                messageBox.style.display = 'none';
-                messageBox.className = 'message';
-            }, 3000);
-            messageBox.style.display = 'block';
-        }
-
-        loginForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-
-            if (!email || !password) {
-                showMessage('Por favor, preencha todos os campos.', 'error');
-                return;
-            }
-
-            if (rememberCheck.checked) {
-                localStorage.setItem('rememberedEmail', email);
-            } else {
-                localStorage.removeItem('rememberedEmail');
-            }
-
-            showMessage('Login realizado com sucesso! Redirecionando...', 'success');
-            
-            setTimeout(() => {
-                alert('Bem-vindo à Chronic IA! (Demonstração)');
-                loginForm.reset();
-            }, 1500);
-        });
-
-        googleBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            showMessage('Redirecionando para autenticação Google...', 'success');
-            setTimeout(() => {
-                alert('Demo: Login com Google simulado!');
-            }, 800);
-        });
-
-        githubBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            showMessage('Redirecionando para autenticação GitHub...', 'success');
-            setTimeout(() => {
-                alert('Demo: Login com GitHub simulado!');
-            }, 800);
-        });
-
-        signupLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            showMessage('Funcionalidade de cadastro disponível em breve!', 'success');
-        });
-
-        document.querySelector('.forgot-link').addEventListener('click', function(e) {
-            e.preventDefault();
-            showMessage('Instruções de recuperação enviadas para seu e-mail (demonstração).', 'success');
-        });
-    </script>
 </body>
 </html>

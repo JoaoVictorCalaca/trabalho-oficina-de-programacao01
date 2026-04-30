@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Chronic IA | Planos e Preços</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap"
+        rel="stylesheet">
     <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -384,15 +387,19 @@
             .container {
                 padding: 0 20px;
             }
+
             .plans-hero h1 {
                 font-size: 2rem;
             }
+
             .plan-card.popular {
                 transform: scale(1);
             }
+
             .plan-card.popular:hover {
                 transform: translateY(-10px);
             }
+
             .faq-grid {
                 grid-template-columns: 1fr;
             }
@@ -404,6 +411,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -415,11 +423,20 @@
             opacity: 0;
         }
 
-        .plan-card:nth-child(1) { animation-delay: 0.1s; }
-        .plan-card:nth-child(2) { animation-delay: 0.2s; }
-        .plan-card:nth-child(3) { animation-delay: 0.3s; }
+        .plan-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .plan-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .plan-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
     </style>
 </head>
+
 <body>
 
     <!-- Header -->
@@ -471,7 +488,7 @@
                     <li class="disabled"><i class="fas fa-times"></i> Análise avançada</li>
                     <li class="disabled"><i class="fas fa-times"></i> Suporte prioritário</li>
                 </ul>
-                <button class="btn-plan" onclick="selecionarPlano('Básico')">Começar agora</button>
+                <button class="btn-plan">Começar agora</button>
             </div>
 
             <!-- Plano Profissional (Popular) -->
@@ -491,7 +508,7 @@
                     <li><i class="fas fa-check"></i> Análise de dados avançada</li>
                     <li><i class="fas fa-check"></i> Treinamento personalizado</li>
                 </ul>
-                <button class="btn-plan" onclick="selecionarPlano('Profissional')">Começar agora</button>
+                <button class="btn-plan">Começar agora</button>
             </div>
 
             <!-- Plano Enterprise -->
@@ -510,7 +527,7 @@
                     <li><i class="fas fa-check"></i> Business Intelligence</li>
                     <li><i class="fas fa-check"></i> On-premise opcional</li>
                 </ul>
-                <button class="btn-plan" onclick="selecionarPlano('Enterprise')">Falar com vendas</button>
+                <button class="btn-plan">Falar com vendas</button>
             </div>
         </div>
 
@@ -524,7 +541,8 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        Sim! Você pode cancelar sua assinatura a qualquer momento. Se cancelar durante o período de teste, não será cobrado.
+                        Sim! Você pode cancelar sua assinatura a qualquer momento. Se cancelar durante o período de
+                        teste, não será cobrado.
                     </div>
                 </div>
                 <div class="faq-item">
@@ -542,7 +560,8 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        Sim, você pode fazer upgrade ou downgrade a qualquer momento. O valor é ajustado proporcionalmente.
+                        Sim, você pode fazer upgrade ou downgrade a qualquer momento. O valor é ajustado
+                        proporcionalmente.
                     </div>
                 </div>
                 <div class="faq-item">
@@ -564,107 +583,6 @@
             <p>&copy; 2025 Chronic IA - Inteligência Artificial do Futuro. Todos os direitos reservados.</p>
         </div>
     </footer>
-
-    <script>
-        // Variável para controlar o tipo de plano (mensal ou anual)
-        let isYearly = false;
-
-        // Preços
-        const prices = {
-            monthly: {
-                basic: 29,
-                pro: 79,
-                enterprise: 199
-            },
-            yearly: {
-                basic: 243,   // 29 * 9 (30% off)
-                pro: 663,     // 79 * 8.4 (30% off)
-                enterprise: 1671 // 199 * 8.4 (30% off)
-            }
-        };
-
-        // Elementos
-        const toggleSwitch = document.getElementById('toggleSwitch');
-        const monthlyLabel = document.getElementById('monthlyLabel');
-        const yearlyLabel = document.getElementById('yearlyLabel');
-        
-        // Função para atualizar os preços na tela
-        function updatePrices() {
-            const basicPrice = document.getElementById('basicPrice');
-            const proPrice = document.getElementById('proPrice');
-            const enterprisePrice = document.getElementById('enterprisePrice');
-            const basicPeriod = document.getElementById('basicPeriod');
-            const proPeriod = document.getElementById('proPeriod');
-            const enterprisePeriod = document.getElementById('enterprisePeriod');
-            const basicOriginal = document.getElementById('basicOriginal');
-            const proOriginal = document.getElementById('proOriginal');
-            const enterpriseOriginal = document.getElementById('enterpriseOriginal');
-
-            if (isYearly) {
-                // Anual
-                basicPrice.innerHTML = `R$ ${prices.yearly.basic}<span>/ano</span>`;
-                proPrice.innerHTML = `R$ ${prices.yearly.pro}<span>/ano</span>`;
-                enterprisePrice.innerHTML = `R$ ${prices.yearly.enterprise}<span>/ano</span>`;
-                basicPeriod.innerHTML = 'faturado anualmente (equivalente a R$ 20/mês)';
-                proPeriod.innerHTML = 'faturado anualmente (equivalente a R$ 55/mês)';
-                enterprisePeriod.innerHTML = 'faturado anualmente (equivalente a R$ 139/mês)';
-                
-                // Mostrar preço original riscado
-                basicOriginal.innerHTML = `De R$ 348/ano`;
-                proOriginal.innerHTML = `De R$ 948/ano`;
-                enterpriseOriginal.innerHTML = `De R$ 2388/ano`;
-            } else {
-                // Mensal
-                basicPrice.innerHTML = `R$ ${prices.monthly.basic}<span>/mês</span>`;
-                proPrice.innerHTML = `R$ ${prices.monthly.pro}<span>/mês</span>`;
-                enterprisePrice.innerHTML = `R$ ${prices.monthly.enterprise}<span>/mês</span>`;
-                basicPeriod.innerHTML = 'faturado mensalmente';
-                proPeriod.innerHTML = 'faturado mensalmente';
-                enterprisePeriod.innerHTML = 'faturado mensalmente';
-                basicOriginal.innerHTML = '';
-                proOriginal.innerHTML = '';
-                enterpriseOriginal.innerHTML = '';
-            }
-        }
-
-        // Alternar entre mensal e anual
-        function togglePlan() {
-            isYearly = !isYearly;
-            
-            if (isYearly) {
-                toggleSwitch.classList.add('active');
-                monthlyLabel.classList.remove('active');
-                yearlyLabel.classList.add('active');
-            } else {
-                toggleSwitch.classList.remove('active');
-                monthlyLabel.classList.add('active');
-                yearlyLabel.classList.remove('active');
-            }
-            
-            updatePrices();
-        }
-
-        // Evento de clique no toggle
-        toggleSwitch.addEventListener('click', togglePlan);
-
-        // FAQ Accordion
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            item.addEventListener('click', () => {
-                item.classList.toggle('active');
-            });
-        });
-
-        // Função para selecionar plano (simulação)
-        function selecionarPlano(plano) {
-            const tipo = isYearly ? 'anual' : 'mensal';
-            alert(`🚀 Você selecionou o plano ${plano} (${tipo})!\n\nRedirecionando para área de pagamento... (Demonstração)`);
-            // Aqui você pode redirecionar para uma página de checkout
-            // window.location.href = `checkout.html?plano=${plano}&tipo=${tipo}`;
-        }
-
-        // Inicializar preços
-        updatePrices();
-    </script>
 </body>
+
 </html>

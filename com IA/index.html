@@ -20,7 +20,7 @@
             color: #1a202c;
             line-height: 1.5;
             scroll-behavior: smooth;
-            background-image: url("com IA/imagem/wallpaper.jpg");
+            background-image: url("../public/wallpaper.png");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -592,7 +592,7 @@
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <img src="com IA/imagem/logo.png.png" alt="Logo Chronic IA" class="logo-img">
+                <img src="../public/icon.png" alt="Logo Chronic IA" class="logo-img">
                 <i class="fas fa-brain"></i>
                 <span>Chronic IA</span>
             </div>
@@ -664,7 +664,7 @@
                     <p>Processamento de linguagem natural com compreensão contextual e multidioma.</p>
                 </div>
                 <div class="card">
-                    <div class="card-icon"><i class="fas fa-chart-network"></i></div>
+                    <div class="card-icon"> <i class="fa-solid fa-chart-area"></i> </div>
                     <h3>Análise Preditiva</h3>
                     <p>Machine learning avançado para prever tendências e tomar decisões baseadas em dados.</p>
                 </div>
@@ -797,65 +797,5 @@
             </div>
         </div>
     </footer>
-
-    <!-- Script -->
-    <script>
-        (function(){
-            const inputField = document.getElementById('userQuestion');
-            const askButton = document.getElementById('askBtn');
-            const responseDiv = document.getElementById('responseBox');
-
-            function getSimulatedAIResponse(question) {
-                const lowerQuestion = question.toLowerCase();
-                if (lowerQuestion.includes('olá') || lowerQuestion.includes('oi') || lowerQuestion.includes('opa')) {
-                    return "👋 Olá! Sou a Chronic IA, prazer em interagir. Como posso potencializar sua ideia hoje?";
-                }
-                if (lowerQuestion.includes('slogan') || lowerQuestion.includes('startup') || lowerQuestion.includes('criar')) {
-                    return "✨ Claro! Que tal: 'Inove sem limites, transforme o amanhã.' ou 'Soluções inteligentes, resultados extraordinários.' Posso gerar mais opções sob demanda!";
-                }
-                if (lowerQuestion.includes('preço') || lowerQuestion.includes('custo') || lowerQuestion.includes('valor')) {
-                    return "💎 Temos planos gratuitos e empresariais. O plano Free dá acesso a até 1000 interações/mês. Entre em contato com vendas para custom enterprise!";
-                }
-                if (lowerQuestion.includes('integral') || lowerQuestion.includes('api') || lowerQuestion.includes('conectar')) {
-                    return "🔌 API RESTful poderosa, documentação completa e SDKs em Python, JS e Java. Integração simples em menos de 15 minutos.";
-                }
-                if (lowerQuestion.includes('étic') || lowerQuestion.includes('segurança') || lowerQuestion.includes('dados')) {
-                    return "🛡️ A Chronic IA segue padrões globais de privacidade, com criptografia ponta a ponta e auditoria algorítmica para garantir justiça e transparência.";
-                }
-                if (lowerQuestion.includes('exemplo') || lowerQuestion.includes('mostre')) {
-                    return "📊 Por exemplo: Posso extrair insights de textos longos, gerar resumos executivos, criar imagens conceituais e prever séries temporais. O que deseja ver?";
-                }
-                if (lowerQuestion.includes('obrigado') || lowerQuestion.includes('valeu')) {
-                    return "🙏 Por nada! Estou aqui para ajudar a revolucionar sua experiência com IA. Continue explorando!";
-                }
-                if (lowerQuestion.includes('quem é você') || lowerQuestion.includes('criador')) {
-                    return "🧠 Sou Chronic IA, uma inteligência artificial de próxima geração desenvolvida pela Chronic Labs (fictício), combinando deep learning e arquitetura neural avançada.";
-                }
-                return "🤖 Interessante! A Chronic IA entende sua pergunta e está constantemente evoluindo. Para uma resposta mais detalhada, acesse nossa documentação ou agende uma demonstração. Que tal eu sugerir integrar IA no seu fluxo de trabalho?";
-            }
-
-            function handleAsk() {
-                let question = inputField.value.trim();
-                if (question === "") {
-                    responseDiv.innerHTML = "⚠️ Por favor, digite uma mensagem para conversar com a Chronic IA.";
-                    return;
-                }
-                responseDiv.innerHTML = "<i class='fas fa-circle-notch fa-spin'></i> Chronic IA está pensando...";
-                setTimeout(() => {
-                    const answer = getSimulatedAIResponse(question);
-                    responseDiv.innerHTML = `<i class="fas fa-robot" style="margin-right: 6px;"></i> <strong>Chronic IA:</strong> ${answer}`;
-                    inputField.value = '';
-                }, 300);
-            }
-
-            askButton.addEventListener('click', handleAsk);
-            inputField.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    handleAsk();
-                }
-            });
-        })();
-    </script>
 </body>
 </html>

@@ -1,11 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Chat | Chronic.ia</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../public/icon.png" type="image/x-icon">
 </head>
-<body>
-    
+<body class="chat-page-body">
+    <header>
+        <div class="logo">
+            <img src="../public/icon.png" alt="Logo">
+            <a href="./index.html"><h1>Chronic.ia</h1></a>
+        </div>
+        <a href="./index.html" class="nav-exit">Sair</a>
+    </header>
+
+    <div class="chat-screen-wrapper">
+        <div class="chat-box-fixed">
+            <div class="chat-messages-view">
+                <div class="msg bubble-ai">
+                    Olá! Este é o ambiente de testes do Chronic.ia. Como posso ajudar hoje?
+                </div>
+                <div class="msg bubble-user">
+                    ...
+                </div>
+                
+            </div>
+
+            <div class="chat-input-bar">
+                <input type="text" placeholder="Digite sua mensagem...">
+                <button type="button">Enviar</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
